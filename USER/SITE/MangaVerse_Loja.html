@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MangaVerse | Loja de Mangás</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="MangaVerse.css">
+</head>
+<body class="min-h-screen flex flex-col">
+  <header class="bg-white border-b border-zinc-200 sticky top-0 z-20">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex flex-wrap gap-4 items-center justify-between">
+      <a href="#" id="homeLink" class="text-2xl font-bold tracking-tight">Manga<span class="text-zinc-500">Verse</span></a>
+      <div class="flex-1 min-w-48 max-w-xl">
+        <input id="searchBar" type="search" placeholder="Buscar mangá pelo nome..."
+          class="w-full border border-zinc-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-zinc-400">
+      </div>
+      <nav class="flex items-center gap-2 flex-wrap">
+        <a href="#login" id="loginLink" class="btn btn-light text-sm">Entrar</a>
+        <a href="#cadastro" id="signupLink" class="btn btn-light text-sm">Criar conta</a>
+        <button id="ordersButton" class="btn btn-light text-sm">Meus pedidos</button>
+        <button id="cartButton" class="btn btn-dark text-sm cart-button" aria-label="Abrir carrinho">
+          <span class="cart-icon">🛒</span> Carrinho
+          <span id="cartPreview" class="cart-preview" aria-hidden="true"></span>
+          <span id="cartCount" class="ml-1 bg-white text-zinc-900 rounded-full px-2">0</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="w-full max-w-7xl mx-auto flex-1 px-4 py-8">
+    <section id="storePage" class="page active">
+      <div class="rounded-2xl bg-zinc-900 text-white p-7 md:p-10 mb-8">
+        <p class="uppercase tracking-widest text-xs text-zinc-300 mb-2">Sua próxima leitura começa aqui</p>
+        <h1 class="text-3xl md:text-4xl font-bold mb-3">Explore o universo dos mangás.</h1>
+        <p class="text-zinc-300 max-w-2xl">Encontre seus títulos favoritos, adicione ao carrinho e acompanhe seus pedidos.</p>
+      </div>
+
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+        <h2 class="text-2xl font-bold">Categorias</h2>
+        <span class="text-sm text-zinc-500">Escolha um gênero para filtrar os títulos</span>
+      </div>
+      <div id="categoryList" class="flex flex-wrap gap-2 mb-8">
+        <button class="btn btn-dark category-button" data-category="Todos">Todos</button>
+        <button class="btn btn-light category-button genre-shounen" data-category="Shounen">Shounen</button>
+        <button class="btn btn-light category-button genre-romance" data-category="Romance">Romance</button>
+        <button class="btn btn-light category-button genre-sports" data-category="Esportes">Esportes</button>
+        <button class="btn btn-light category-button genre-horror" data-category="Horror">Horror</button>
+        <button class="btn btn-light category-button genre-isekai" data-category="Isekai">Isekai</button>
+        <button class="btn btn-light category-button genre-shoujo" data-category="Shoujo">Shoujo</button>
+        <button class="btn btn-light category-button genre-seinen" data-category="Seinen">Seinen</button>
+        <button class="btn btn-light category-button genre-action" data-category="Ação">Ação</button>
+        <button class="btn btn-light category-button genre-fantasy" data-category="Fantasia">Fantasia</button>
+      </div>
+
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold">Mangás disponíveis</h2>
+        <span id="resultCount" class="text-sm text-zinc-500"></span>
+      </div>
+      <div id="mangaGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5"></div>
+
+      <section id="storeCartDrop" class="store-cart-drop" aria-label="Carrinho de compras visual">
+        <div class="drop-cart-heading">
+          <div>
+            <p class="drop-cart-eyebrow">SEU CARRINHO</p>
+            <h2>Seu cesto de mangás</h2>
+            <p>Adicione mangás e veja cada volume cair aqui embaixo.</p>
+          </div>
+          <div class="drop-cart-total"><span id="dropCartCount">0</span><small>itens</small></div>
+        </div>
+        <div class="basket-scene">
+          <div class="basket-sparkle sparkle-one">✦</div>
+          <div class="basket-sparkle sparkle-two">✧</div>
+          <div id="basketItems" class="basket-items" aria-live="polite">
+            <span class="basket-empty">Seu cesto está esperando por mangás!</span>
+          </div>
+          <div class="big-basket" aria-hidden="true">
+            <div class="basket-rim"></div>
+            <div class="basket-body"><span>🛒</span><b>MANGAVERSE</b></div>
+          </div>
+        </div>
+        <div class="basket-controls">
+          <p id="basketSelectionText">Clique nas capas para selecionar e remover.</p>
+          <button id="removeSelectedButton" class="btn btn-light" type="button" disabled>Remover selecionados</button>
+          <button id="openFullCartButton" class="btn btn-dark" type="button">Ver carrinho completo</button>
+        </div>
+      </section>
+    </section>
+
+    <section id="cartPage" class="page max-w-4xl mx-auto">
+      <div class="flex justify-between items-center gap-3 mb-6">
+        <h1 class="text-3xl font-bold">Meu carrinho</h1>
+        <button class="btn btn-light backHome">← Continuar comprando</button>
+      </div>
+      <div id="cartItems" class="space-y-3"></div>
+      <div class="bg-white border rounded-xl p-5 mt-6">
+        <div class="flex justify-between text-lg font-bold mb-4"><span>Total</span><span id="cartTotal">R$ 0,00</span></div>
+        <button id="checkoutButton" class="btn btn-dark w-full">Finalizar pedido (simulação)</button>
+        <p class="text-xs text-zinc-500 mt-3">Este projeto é uma demonstração acadêmica: não há cobrança nem pagamento real.</p>
+      </div>
+    </section>
+
+    <section id="ordersPage" class="page max-w-4xl mx-auto">
+      <div class="flex justify-between items-center gap-3 mb-6">
+        <h1 class="text-3xl font-bold">Meus pedidos</h1>
+        <button class="btn btn-light backHome">← Voltar à loja</button>
+      </div>
+      <div id="ordersList" class="space-y-4"></div>
+    </section>
+
+    <section id="accountPage" class="page max-w-md mx-auto bg-white border rounded-2xl p-6">
+      <h1 id="accountTitle" class="text-2xl font-bold mb-2">Entrar</h1>
+      <p class="text-sm text-zinc-500 mb-5">Área demonstrativa para a apresentação do projeto.</p>
+      <form id="accountForm" class="space-y-4">
+        <label class="block text-sm font-medium">E-mail
+          <input type="email" required class="mt-1 w-full border rounded-lg p-2" placeholder="seuemail@exemplo.com">
+        </label>
+        <label class="block text-sm font-medium">Senha
+          <input type="password" required minlength="4" class="mt-1 w-full border rounded-lg p-2" placeholder="Sua senha">
+        </label>
+        <button class="btn btn-dark w-full" type="submit">Continuar</button>
+      </form>
+      <p id="accountMessage" class="text-sm text-green-700 mt-4" aria-live="polite"></p>
+      <button class="backHome text-sm underline mt-4">Voltar para a loja</button>
+    </section>
+  </main>
+
+  <footer class="bg-zinc-900 text-zinc-300 text-center p-5 text-sm">
+    <p>© 2026 MangaVerse — Projeto acadêmico de loja de mangás.</p>
+  </footer>
+
+  <script>
+    // Catálogo de demonstração. Os preços e dados podem ser alterados aqui.
+    const mangaData = [
+      { id: 1, title: "Jujutsu Kaisen", genre: ["Shounen", "Ação", "Fantasia"], price: 39.90,
+        cover: "https://m.media-amazon.com/images/I/81TmHlRleJL.jpg",
+        description: "Uma aventura sobrenatural repleta de feiticeiros e maldições." },
+      { id: 2, title: "One Piece", genre: ["Shounen", "Ação", "Fantasia"], price: 42.90,
+        cover: "https://jumpichiban.com/cdn/shop/files/ONEPIECE106MangaComicBook.jpg?v=1738181523",
+        description: "Uma tripulação de piratas busca o lendário tesouro." },
+      { id: 3, title: "Blue Lock", genre: ["Shounen", "Esportes"], price: 36.90,
+        cover: "https://m.media-amazon.com/images/I/81Z85oL1xvL._AC_UF1000,1000_QL80_.jpg",
+        description: "Um projeto competitivo procura criar o maior atacante do Japão." },
+      { id: 4, title: "Solo Leveling", genre: ["Ação", "Fantasia"], price: 44.90,
+        cover: "https://cdn.oneesports.gg/cdn-data/2024/04/Anime_SoloLeveling_Arise_JinwooSung_HaeInCha_ChoiJongIn_BloodRedCommanderIgris_Tusk.jpg",
+        description: "Um caçador ganha a chance de evoluir e superar seus limites." },
+      { id: 5, title: "Kaguya-sama", genre: ["Romance"], price: 34.90,
+        cover: "https://m.media-amazon.com/images/I/81TmHlRleJL.jpg",
+        description: "Dois estudantes tentam fazer o outro confessar seus sentimentos." }
+    ];
+
+    // Carrinho e pedidos ficam salvos neste navegador usando localStorage.
+    let cart = JSON.parse(localStorage.getItem("mangaverse_cart")) || [];
+    let orders = JSON.parse(localStorage.getItem("mangaverse_orders")) || [];
+    let selectedCategory = "Todos";
+
+    const mangaGrid = document.getElementById("mangaGrid");
+    const searchBar = document.getElementById("searchBar");
+
+    function money(value) {
+      return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+    }
+
+    function saveData() {
+      localStorage.setItem("mangaverse_cart", JSON.stringify(cart));
+      localStorage.setItem("mangaverse_orders", JSON.stringify(orders));
+      updateCartCount();
+    }
+
+    function showPage(pageId) {
+      document.querySelectorAll(".page").forEach(page => page.classList.remove("active"));
+      document.getElementById(pageId).classList.add("active");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function renderMangas() {
+      const search = searchBar.value.trim().toLowerCase();
+      const filtered = mangaData.filter(manga => {
+        const matchesName = manga.title.toLowerCase().includes(search);
+        const matchesCategory = selectedCategory === "Todos" || manga.genre.includes(selectedCategory);
+        return matchesName && matchesCategory;
+      });
+
+      document.getElementById("resultCount").textContent = `${filtered.length} título(s)`;
+      mangaGrid.innerHTML = "";
+
+      if (filtered.length === 0) {
+        mangaGrid.innerHTML = '<p class="col-span-full text-zinc-500">Nenhum mangá encontrado.</p>';
+        return;
+      }
+
+      filtered.forEach(manga => {
+        const card = document.createElement("article");
+        card.className = "manga-card bg-white border border-zinc-200 rounded-xl overflow-hidden";
+        card.innerHTML = `
+          <img src="${manga.cover}" alt="Capa de ${manga.title}" class="w-full h-64 object-cover bg-zinc-200"
+               onerror="this.src='https://placehold.co/400x600?text=Capa+indisponivel'">
+          <div class="p-4">
+            <div class="flex flex-wrap gap-1 mb-2">${manga.genre.map(g => `<span class="badge">${g}</span>`).join("")}</div>
+            <h3 class="font-bold text-lg">${manga.title}</h3>
+            <p class="text-sm text-zinc-500 min-h-10 mt-1">${manga.description}</p>
+            <p class="font-bold text-xl mt-3">${money(manga.price)}</p>
+            <button class="btn btn-dark w-full mt-3 add-cart" data-id="${manga.id}">🛒 Adicionar ao carrinho</button>
+          </div>`;
+        mangaGrid.appendChild(card);
+      });
+    }
+
+    const selectedBasketItems = new Set();
+
+    function updateCartCount() {
+      const quantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+      document.getElementById("cartCount").textContent = quantity;
+      document.getElementById("dropCartCount").textContent = quantity;
+      const preview = document.getElementById("cartPreview");
+      preview.innerHTML = "";
+      cart.slice(0, 4).forEach((item, index) => {
+        const manga = mangaData.find(product => product.id === item.id);
+        if (!manga) return;
+        const cover = document.createElement("img");
+        cover.src = manga.cover;
+        cover.alt = "";
+        cover.title = manga.title;
+        cover.className = "cart-preview-cover";
+        cover.style.setProperty("--cover-index", index);
+        preview.appendChild(cover);
+      });
+      preview.classList.toggle("has-items", quantity > 0);
+      renderBasket();
+    }
+
+    function renderBasket() {
+      const basket = document.getElementById("basketItems");
+      const selectionText = document.getElementById("basketSelectionText");
+      const removeButton = document.getElementById("removeSelectedButton");
+      if (!basket) return;
+      basket.innerHTML = "";
+      const copies = [];
+      cart.forEach(item => {
+        const manga = mangaData.find(product => product.id === item.id);
+        if (!manga) return;
+        for (let copy = 0; copy < item.quantity; copy++) {
+          copies.push({ id: item.id, copy, manga });
+        }
+      });
+      if (copies.length === 0) {
+        basket.innerHTML = '<span class="basket-empty">Seu cesto está esperando por mangás!</span>';
+      }
+      copies.forEach((entry, index) => {
+        const key = `${entry.id}-${entry.copy}`;
+        const selected = selectedBasketItems.has(key);
+        const coverButton = document.createElement("button");
+        coverButton.type = "button";
+        coverButton.className = `basket-manga ${selected ? "is-selected" : ""}`;
+        coverButton.dataset.id = entry.id;
+        coverButton.dataset.copy = entry.copy;
+        coverButton.style.setProperty("--pile-index", index);
+        coverButton.setAttribute("aria-pressed", String(selected));
+        coverButton.title = `${entry.manga.title} — clique para ${selected ? "desmarcar" : "selecionar"}`;
+        coverButton.innerHTML = `<img src="${entry.manga.cover}" alt="Capa de ${entry.manga.title}"><span>${selected ? "✓" : ""}</span>`;
+        basket.appendChild(coverButton);
+      });
+      // Descarta seleções que deixaram de existir após alterações de quantidade.
+      const validKeys = new Set(copies.map(entry => `${entry.id}-${entry.copy}`));
+      selectedBasketItems.forEach(key => { if (!validKeys.has(key)) selectedBasketItems.delete(key); });
+      const selectedCount = selectedBasketItems.size;
+      selectionText.textContent = selectedCount
+        ? `${selectedCount} mangá(s) selecionado(s).`
+        : "Clique nas capas para selecionar e remover.";
+      removeButton.disabled = selectedCount === 0;
+    }
+
+    function animateCoverToCart(sourceImage) {
+      const target = document.querySelector(".big-basket");
+      if (!sourceImage || !target) return;
+      const start = sourceImage.getBoundingClientRect();
+      const end = target.getBoundingClientRect();
+      const flying = sourceImage.cloneNode(true);
+      flying.className = "flying-cover";
+      flying.style.left = `${start.left}px`;
+      flying.style.top = `${start.top}px`;
+      flying.style.width = `${Math.min(start.width, 115)}px`;
+      flying.style.height = `${Math.min(start.height, 155)}px`;
+      document.body.appendChild(flying);
+      const startX = start.left + start.width / 2;
+      const endX = end.left + end.width / 2;
+      const distanceX = endX - startX;
+      const distanceY = Math.max(180, end.top + end.height * .2 - start.top);
+      flying.style.setProperty("--fall-x", `${distanceX}px`);
+      flying.style.setProperty("--fall-y", `${distanceY}px`);
+      requestAnimationFrame(() => flying.classList.add("falling-into-basket"));
+      flying.addEventListener("animationend", () => flying.remove(), { once: true });
+      setTimeout(() => flying.remove(), 1500);
+      target.classList.remove("basket-receive");
+      void target.offsetWidth;
+      target.classList.add("basket-receive");
+      setTimeout(() => target.classList.remove("basket-receive"), 600);
+    }
+
+    function renderCart() {
+      const container = document.getElementById("cartItems");
+      container.innerHTML = "";
+      if (cart.length === 0) {
+        container.innerHTML = '<div class="bg-white border rounded-xl p-6 text-zinc-500">Seu carrinho está vazio.</div>';
+      }
+
+      cart.forEach(item => {
+        const manga = mangaData.find(product => product.id === item.id);
+        if (!manga) return;
+        const row = document.createElement("div");
+        row.className = "bg-white border rounded-xl p-4 flex flex-wrap items-center gap-4";
+        row.innerHTML = `
+          <img src="${manga.cover}" alt="" class="w-16 h-20 object-cover rounded">
+          <div class="flex-1 min-w-32"><h3 class="font-bold">${manga.title}</h3><p class="text-sm text-zinc-500">${money(manga.price)} cada</p></div>
+          <div class="flex items-center gap-2">
+            <button class="btn btn-light quantity-change" data-id="${manga.id}" data-change="-1" aria-label="Diminuir quantidade">−</button>
+            <span>${item.quantity}</span>
+            <button class="btn btn-light quantity-change" data-id="${manga.id}" data-change="1" aria-label="Aumentar quantidade">+</button>
+          </div>
+          <strong>${money(manga.price * item.quantity)}</strong>
+          <button class="text-red-600 text-sm remove-item" data-id="${manga.id}">Remover</button>`;
+        container.appendChild(row);
+      });
+
+      const total = cart.reduce((sum, item) => {
+        const manga = mangaData.find(product => product.id === item.id);
+        return sum + (manga ? manga.price * item.quantity : 0);
+      }, 0);
+      document.getElementById("cartTotal").textContent = money(total);
+      document.getElementById("checkoutButton").disabled = cart.length === 0;
+      document.getElementById("checkoutButton").classList.toggle("opacity-50", cart.length === 0);
+    }
+
+    function renderOrders() {
+      const container = document.getElementById("ordersList");
+      if (orders.length === 0) {
+        container.innerHTML = '<div class="bg-white border rounded-xl p-6 text-zinc-500">Você ainda não realizou nenhum pedido.</div>';
+        return;
+      }
+      container.innerHTML = "";
+      [...orders].reverse().forEach(order => {
+        const box = document.createElement("article");
+        box.className = "bg-white border rounded-xl p-5";
+        box.innerHTML = `
+          <div class="flex flex-wrap justify-between gap-2 mb-3">
+            <strong>Pedido #${order.number}</strong><span class="badge">${order.status}</span>
+          </div>
+          <p class="text-sm text-zinc-500 mb-2">${order.date}</p>
+          <ul class="text-sm list-disc ml-5">${order.items.map(item => `<li>${item.title} — ${item.quantity} un.</li>`).join("")}</ul>
+          <p class="font-bold mt-3">Total: ${money(order.total)}</p>`;
+        container.appendChild(box);
+      });
+    }
+
+    // Um único listener no catálogo identifica qual botão foi pressionado.
+    mangaGrid.addEventListener("click", event => {
+      const button = event.target.closest(".add-cart");
+      if (!button) return;
+      const id = Number(button.dataset.id);
+      const coverImage = button.closest(".manga-card")?.querySelector("img");
+      const existing = cart.find(item => item.id === id);
+      if (existing) existing.quantity++;
+      else cart.push({ id, quantity: 1 });
+      saveData();
+      requestAnimationFrame(() => animateCoverToCart(coverImage));
+      button.textContent = "✓ Adicionado!";
+      setTimeout(() => button.textContent = "🛒 Adicionar ao carrinho", 1000);
+    });
+
+    document.getElementById("basketItems").addEventListener("click", event => {
+      const coverButton = event.target.closest(".basket-manga");
+      if (!coverButton) return;
+      const key = `${coverButton.dataset.id}-${coverButton.dataset.copy}`;
+      if (selectedBasketItems.has(key)) selectedBasketItems.delete(key);
+      else selectedBasketItems.add(key);
+      renderBasket();
+    });
+
+    document.getElementById("removeSelectedButton").addEventListener("click", () => {
+      const removals = new Map();
+      selectedBasketItems.forEach(key => {
+        const [id] = key.split("-").map(Number);
+        removals.set(id, (removals.get(id) || 0) + 1);
+      });
+      removals.forEach((quantity, id) => {
+        const item = cart.find(product => product.id === id);
+        if (!item) return;
+        item.quantity -= quantity;
+        if (item.quantity <= 0) cart = cart.filter(product => product.id !== id);
+      });
+      selectedBasketItems.clear();
+      saveData();
+      renderCart();
+    });
+
+    document.getElementById("openFullCartButton").addEventListener("click", () => {
+      renderCart();
+      showPage("cartPage");
+    });
+
+    document.getElementById("cartItems").addEventListener("click", event => {
+      const id = Number(event.target.dataset.id);
+      if (event.target.classList.contains("quantity-change")) {
+        const item = cart.find(product => product.id === id);
+        item.quantity += Number(event.target.dataset.change);
+        if (item.quantity <= 0) cart = cart.filter(product => product.id !== id);
+        saveData(); renderCart();
+      }
+      if (event.target.classList.contains("remove-item")) {
+        cart = cart.filter(product => product.id !== id);
+        saveData(); renderCart();
+      }
+    });
+
+    document.getElementById("checkoutButton").addEventListener("click", () => {
+      if (cart.length === 0) return;
+      const items = cart.map(item => {
+        const manga = mangaData.find(product => product.id === item.id);
+        return { title: manga.title, quantity: item.quantity };
+      });
+      const total = cart.reduce((sum, item) => sum + mangaData.find(m => m.id === item.id).price * item.quantity, 0);
+      orders.push({
+        number: Date.now().toString().slice(-6),
+        date: new Date().toLocaleString("pt-BR"),
+        status: "Registrado (simulação)",
+        items,
+        total
+      });
+      cart = [];
+      saveData();
+      renderCart();
+      renderOrders();
+      showPage("ordersPage");
+      alert("Pedido de demonstração registrado! Nenhum pagamento foi realizado.");
+    });
+
+    document.getElementById("categoryList").addEventListener("click", event => {
+      const button = event.target.closest(".category-button");
+      if (!button) return;
+      selectedCategory = button.dataset.category;
+      document.querySelectorAll(".category-button").forEach(btn => {
+        btn.classList.toggle("btn-dark", btn === button);
+        btn.classList.toggle("btn-light", btn !== button);
+      });
+      renderMangas();
+    });
+
+    searchBar.addEventListener("input", renderMangas);
+    document.getElementById("cartButton").addEventListener("click", () => { renderCart(); showPage("cartPage"); });
+    document.getElementById("ordersButton").addEventListener("click", () => { renderOrders(); showPage("ordersPage"); });
+    document.getElementById("homeLink").addEventListener("click", event => { event.preventDefault(); showPage("storePage"); });
+    document.querySelectorAll(".backHome").forEach(button => button.addEventListener("click", () => showPage("storePage")));
+
+    function openAccount(mode) {
+      document.getElementById("accountTitle").textContent = mode === "signup" ? "Criar conta" : "Entrar";
+      document.getElementById("accountMessage").textContent = "";
+      showPage("accountPage");
+    }
+    document.getElementById("loginLink").addEventListener("click", event => { event.preventDefault(); openAccount("login"); });
+    document.getElementById("signupLink").addEventListener("click", event => { event.preventDefault(); openAccount("signup"); });
+    document.getElementById("accountForm").addEventListener("submit", event => {
+      event.preventDefault();
+      document.getElementById("accountMessage").textContent =
+        "Formulário demonstrativo. Para login real, será necessário conectar um backend e um banco de dados.";
+    });
+
+    // Primeira renderização ao abrir a página.
+    renderMangas();
+    updateCartCount();
+  </script>
+</body>
+</html>

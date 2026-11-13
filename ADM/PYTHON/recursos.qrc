@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/images">
+    <file>FUNDO_ADM_CADASTRO.png</file>
+    <file>FUNDO_ADM_LOGIN.png</file>
+  </qresource>
+</RCC>

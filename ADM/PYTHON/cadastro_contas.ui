@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1364</width>
+    <height>947</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* Container principal do formulário */
+QWidget#Form {
+    background-color: #e0e0e0; /* Fundo cinza para contrastar com o fundo geral do app */
+    background-image: url(:/images/FUNDO_ADM_CADASTRO.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 4px double #000000; 
+    border-radius: 8px;
+    padding: 15px;
+}
+
+/* Títulos e Textos fixos */
+QLabel {
+    font-size: 24px; 
+    color: #000000; 
+    font-weight: bold;
+    font-family: &quot;Impact&quot;, &quot;Arial Black&quot;, sans-serif;
+    background-color: transparent; /* Mantém o texto limpo sobre o fundo */
+}
+
+/* Campos de entrada de texto (Linha Única) */
+QLineEdit {
+    background-color: #ffffff; /* Fundo branco para dar alto contraste com o texto */
+    color: #000000; 
+    font-size: 20px; 
+    font-weight: bold;
+    border: 3px solid #000000; /* Linha de nanquim grossa */
+    border-radius: 0px; 
+    padding: 8px;
+    cursor: ibeam;
+}
+
+QLineEdit:hover {
+    background-color: #808080; /* MUDOU: O fundo do campo fica cinza escuro ao passar o mouse */
+    color: #ffffff; /* Texto inverte para branco para manter a leitura */
+    border: 3px solid #000000; 
+}
+
+QLineEdit:focus {
+    background-color: #ffffff;
+    color: #000000;
+    border: 5px solid #000000; /* Borda engrossa simulando traço forte de ação */
+}
+
+/* Campos de entrada de texto (Multilinha) */
+QTextEdit {
+    background-color: #ffffff; /* Fundo branco */
+    color: #000000; 
+    font-size: 18px; 
+    border: 3px solid #000000;
+    border-radius: 0px;
+    padding: 10px;
+    cursor: ibeam;
+}
+
+QTextEdit:hover {
+    background-color: #808080; /* MUDOU: Fundo cinza escuro no hover */
+    color: #ffffff;
+    border: 3px solid #000000;
+}
+
+QTextEdit:focus {
+    background-color: #ffffff;
+    color: #000000;
+    border: 5px solid #000000;
+}
+
+/* Botões de Ação estilo Onomatopeia */
+QPushButton {
+    background-color: #000000; /* Fundo totalmente preto */
+    color: #ffffff; 
+    font-size: 18px; 
+    font-weight: bold;
+    text-transform: uppercase; 
+    border: 3px solid #000000;
+    border-radius: 0px;
+    padding: 10px 20px;
+    cursor: pointinghand;
+}
+
+QPushButton:hover {
+    background-color: #ffffff; /* MUDOU: Inverte o background para branco */
+    color: #000000;
+    border: 3px solid #000000;
+}
+
+QPushButton:pressed {
+    background-color: #808080; /* MUDOU: Fundo cinza médio no clique (sombra de pressão) */
+    color: #ffffff;
+    border: 3px solid #000000;
+}
+
+QFrame#painel {
+    background-color: rgba(218, 228, 235, 190);
+    border: 1px solid rgba(255, 255, 255, 50);
+    border-radius: 12px;
+}</string>
+  </property>
+  <widget class="QLineEdit" name="txt_senha">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>600</y>
+     <width>371</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>330</y>
+     <width>291</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Usuario</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_2">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>450</y>
+     <width>291</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>E-mail</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txt_email">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>490</y>
+     <width>371</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_4">
+   <property name="geometry">
+    <rect>
+     <x>530</x>
+     <y>240</y>
+     <width>291</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cadastro de Contas</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txt_usuario">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>370</y>
+     <width>371</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QFrame" name="painel">
+   <property name="geometry">
+    <rect>
+     <x>410</x>
+     <y>230</y>
+     <width>461</width>
+     <height>581</height>
+    </rect>
+   </property>
+   <property name="frameShape">
+    <enum>QFrame::StyledPanel</enum>
+   </property>
+   <property name="frameShadow">
+    <enum>QFrame::Raised</enum>
+   </property>
+   <widget class="QPushButton" name="btn_criar">
+    <property name="geometry">
+     <rect>
+      <x>130</x>
+      <y>440</y>
+      <width>171</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>CriarConta</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btn_login">
+    <property name="geometry">
+     <rect>
+      <x>150</x>
+      <y>530</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Login</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QLabel" name="label_3">
+   <property name="geometry">
+    <rect>
+     <x>460</x>
+     <y>560</y>
+     <width>291</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Senha</string>
+   </property>
+  </widget>
+  <zorder>painel</zorder>
+  <zorder>txt_senha</zorder>
+  <zorder>label</zorder>
+  <zorder>label_2</zorder>
+  <zorder>txt_email</zorder>
+  <zorder>label_4</zorder>
+  <zorder>txt_usuario</zorder>
+  <zorder>label_3</zorder>
+ </widget>
+ <resources>
+  <include location="recursos.qrc"/>
+ </resources>
+ <connections/>
+</ui>

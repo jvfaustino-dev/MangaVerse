@@ -1,0 +1,462 @@
+/* =========================================================
+   MANGAVERSE — identidade visual
+   Paleta: preto, branco e tons de cinza.
+   Este arquivo complementa o HTML da loja.
+   ========================================================= */
+
+:root {
+  --preto: #202020;
+  --preto-card: #292929;
+  --cinza-escuro: #555b58;
+  --cinza: #aeb4b1;
+  --cinza-claro: #e5e7e6;
+  --branco: #f8f8f7;
+  --sombra: 0 8px 24px rgba(0, 0, 0, .14);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--preto);
+  font-family: "Roboto", Arial, sans-serif;
+  background-color: #d9ddda;
+  /* Textura discreta inspirada no fundo das telas de referência */
+  background-image:
+    radial-gradient(circle, rgba(40, 45, 42, .15) 1.5px, transparent 2px),
+    linear-gradient(135deg, #eef0ee, #c9cecb);
+  background-size: 13px 13px, 100% 100%;
+  background-attachment: fixed;
+}
+
+/* ---------- Cabeçalho ---------- */
+
+header {
+  background: rgba(250, 250, 249, .94) !important;
+  border-bottom: 1px solid #b9bfbc !important;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, .09);
+  backdrop-filter: blur(10px);
+}
+
+header > div {
+  max-width: 1440px !important;
+}
+
+#homeLink {
+  color: #68716c !important;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  text-transform: uppercase;
+}
+
+/* Caso utilize a imagem da logo no lugar do texto:
+   <img class="logo-mangaverse" src="logo-mangaverse.png" alt="MangaVerse"> */
+.logo-mangaverse {
+  display: block;
+  width: min(320px, 45vw);
+  height: auto;
+  object-fit: contain;
+}
+
+#searchBar {
+  min-height: 42px;
+  border: 1px solid #aeb4b1 !important;
+  border-radius: 7px !important;
+  background: #fff;
+}
+
+#searchBar:focus {
+  border-color: #555b58 !important;
+  --tw-ring-color: #8d9691 !important;
+}
+
+header nav a,
+header nav button {
+  min-height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+/* ---------- Botões ---------- */
+
+.btn {
+  border-radius: 7px;
+  font-weight: 700;
+  transition: background .2s, transform .2s, box-shadow .2s;
+}
+
+.btn-dark,
+.btn-primary {
+  color: #fff !important;
+  background: var(--preto-card) !important;
+  border: 1px solid var(--preto-card) !important;
+}
+
+.btn-dark:hover,
+.btn-primary:hover {
+  background: #454a47 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, .16);
+}
+
+.btn-light {
+  color: #292d2b !important;
+  background: #f8f9f8 !important;
+  border: 1px solid #aeb4b1 !important;
+}
+
+.btn-light:hover {
+  background: #e3e6e4 !important;
+  transform: translateY(-1px);
+}
+
+/* ---------- Conteúdo principal e títulos ---------- */
+
+main {
+  max-width: 1440px !important;
+}
+
+h1, h2, h3 {
+  color: #242725;
+}
+
+#storePage > div:first-child {
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid #454a47;
+  border-radius: 12px !important;
+  background:
+    linear-gradient(90deg, rgba(25, 27, 26, .96), rgba(25, 27, 26, .72)),
+    repeating-linear-gradient(135deg, #333 0 8px, #292929 8px 16px) !important;
+  box-shadow: var(--sombra);
+}
+
+#storePage > div:first-child h1,
+#storePage > div:first-child p {
+  color: #fff !important;
+}
+
+/* ---------- Categorias ---------- */
+
+#categoryList {
+  padding: 13px;
+  border: 1px solid #c0c5c2;
+  border-radius: 10px;
+  background: rgba(248, 249, 248, .83);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .06);
+}
+
+.category-button {
+  min-width: 95px;
+}
+
+/* ---------- Cartões de mangá ---------- */
+
+#mangaGrid {
+  align-items: stretch;
+}
+
+.manga-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #c6cbc8 !important;
+  border-radius: 10px !important;
+  background: rgba(250, 250, 249, .97) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+  overflow: hidden;
+}
+
+.manga-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 22px rgba(0, 0, 0, .17);
+}
+
+.manga-card > img {
+  height: 290px !important;
+  object-fit: contain !important;
+  padding: 8px;
+  background: #e5e7e6 !important;
+}
+
+.manga-card h3 {
+  color: #242725 !important;
+}
+
+.manga-card p {
+  color: #626965 !important;
+}
+
+.manga-card .badge {
+  color: #343936;
+  background: #dfe3e0;
+  border: 1px solid #c5cbc7;
+}
+
+.manga-card .add-cart {
+  min-height: 42px;
+  margin-top: auto;
+}
+
+/* ---------- Carrinho e pedidos ---------- */
+
+#cartPage,
+#ordersPage,
+#accountPage {
+  padding-top: 24px;
+  padding-bottom: 40px;
+}
+
+#cartItems > div,
+#ordersList > article,
+#cartPage > div.bg-white,
+#accountPage {
+  border: 1px solid #c4cac6 !important;
+  border-radius: 12px !important;
+  background: rgba(250, 250, 249, .97) !important;
+  box-shadow: var(--sombra);
+}
+
+#cartCount {
+  font-weight: 800;
+}
+
+/* ---------- Login e cadastro ---------- */
+
+#accountPage {
+  max-width: 430px !important;
+  margin: 45px auto;
+  padding: 34px !important;
+  color: #fff;
+  background: #292929 !important;
+  border: 1px solid #3a3a3a !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, .25);
+}
+
+#accountPage h1 {
+  color: #f5f5f5;
+  text-align: center;
+}
+
+#accountPage > p {
+  color: #bdbdbd !important;
+  text-align: center;
+}
+
+#accountForm label {
+  color: #e4e4e4;
+}
+
+#accountForm input {
+  min-height: 48px;
+  padding: 12px 15px;
+  color: #252525;
+  background: #dedede;
+  border: 1px solid #b8b8b8;
+  border-radius: 9px;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, .2);
+}
+
+#accountForm input:focus {
+  outline: 2px solid #aeb4b1;
+  outline-offset: 2px;
+}
+
+#accountForm button {
+  min-height: 46px;
+}
+
+#accountPage .backHome {
+  color: #d4d4d4;
+}
+
+/* ---------- Rodapé ---------- */
+
+footer {
+  margin-top: 45px;
+  color: #e8e8e8 !important;
+  background: #242625 !important;
+  border-top: 1px solid #505653;
+}
+
+footer a {
+  color: #c4cbc7 !important;
+}
+
+footer a:hover {
+  color: #fff !important;
+}
+
+/* ---------- Responsividade ---------- */
+
+@media (max-width: 700px) {
+  header > div {
+    justify-content: center;
+  }
+
+  header nav {
+    justify-content: center;
+    width: 100%;
+  }
+
+  #searchBar {
+    width: 100%;
+  }
+
+  #storePage > div:first-child {
+    min-height: 190px;
+    padding: 24px !important;
+  }
+
+  .manga-card > img {
+    height: 250px !important;
+  }
+
+  #accountPage {
+    margin: 20px auto;
+    padding: 24px !important;
+  }
+}
+
+
+/* ---------- Identidade própria dos botões de gênero ---------- */
+#categoryList {
+  align-items: stretch;
+  gap: 10px;
+}
+
+.category-button {
+  position: relative;
+  isolation: isolate;
+  min-height: 48px;
+  padding: 10px 18px;
+  overflow: hidden;
+  border: 1px solid rgba(40, 40, 40, .2) !important;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .08);
+}
+
+.category-button::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: .9;
+  transition: opacity .2s, transform .25s;
+}
+
+.category-button:hover::before { opacity: 1; transform: scale(1.08); }
+.category-button:not(.btn-dark) { color: #242725 !important; }
+.category-button.genre-romance::before {
+  background: radial-gradient(ellipse at 18% 25%, #fff 0 5%, transparent 6%), radial-gradient(ellipse at 82% 72%, #fff 0 5%, transparent 6%), linear-gradient(120deg, #f5dfe5, #e8c5d1 55%, #f7e9ed);
+}
+.category-button.genre-shounen::before {
+  background: repeating-linear-gradient(135deg, transparent 0 8px, rgba(255,255,255,.45) 8px 10px), linear-gradient(120deg, #e4e4e4, #9da3a0);
+}
+.category-button.genre-sports::before {
+  background: repeating-linear-gradient(0deg, transparent 0 12px, rgba(255,255,255,.45) 12px 14px), linear-gradient(110deg, #dce8df, #aebfb3);
+}
+.category-button.genre-horror::before {
+  background: radial-gradient(ellipse at 80% 15%, rgba(255,255,255,.7), transparent 30%), linear-gradient(125deg, #bfc3c0, #777e7a 70%, #d6d8d7);
+}
+.category-button.genre-isekai::before {
+  background: radial-gradient(circle at 75% 25%, #fff 0 2px, transparent 3px), radial-gradient(circle at 20% 70%, #fff 0 2px, transparent 3px), linear-gradient(120deg, #e2e5e2, #b7c2bb);
+}
+.category-button.genre-shoujo::before {
+  background: radial-gradient(circle at 20% 25%, rgba(255,255,255,.9) 0 3px, transparent 4px), radial-gradient(circle at 80% 70%, rgba(255,255,255,.8) 0 3px, transparent 4px), linear-gradient(120deg, #eee5ed, #d7c9d9);
+}
+.category-button.genre-seinen::before {
+  background: repeating-linear-gradient(115deg, transparent 0 13px, rgba(255,255,255,.25) 13px 15px), linear-gradient(120deg, #d0d2d0, #8d9490);
+}
+.category-button.genre-action::before { background: repeating-linear-gradient(135deg, #e5e7e6 0 10px, #c3c9c5 10px 13px); }
+.category-button.genre-fantasy::before { background: radial-gradient(circle at 50% 50%, #fff 0 2px, transparent 3px), linear-gradient(120deg, #e4e7e5, #c0c9c3); }
+.category-button.btn-dark::before { filter: grayscale(1) brightness(.48); }
+.category-button.btn-dark { color: #fff !important; border-color: #292929 !important; }
+
+/* ---------- Carrinho com capas acumuladas e animação de entrada ---------- */
+.cart-button { position: relative; display: inline-flex; align-items: center; gap: 6px; overflow: visible; }
+.cart-preview { display: inline-flex; align-items: center; min-width: 0; margin-left: 2px; }
+.cart-preview-cover {
+  width: 19px;
+  height: 27px;
+  object-fit: cover;
+  border: 1px solid #fff;
+  border-radius: 3px;
+  margin-left: -7px;
+  box-shadow: 0 2px 5px rgba(0,0,0,.25);
+  transform: rotate(calc((var(--cover-index) - 1) * 5deg));
+  animation: cover-pop .28s ease-out both;
+}
+.cart-preview-cover:first-child { margin-left: 0; }
+.flying-cover {
+  position: fixed;
+  z-index: 1000;
+  object-fit: cover;
+  border-radius: 6px;
+  pointer-events: none;
+  box-shadow: 0 12px 28px rgba(0,0,0,.3);
+  transition: transform .72s cubic-bezier(.2,.8,.25,1), opacity .72s ease;
+}
+.cart-bump { animation: cart-bump .4s ease; }
+@keyframes cover-pop { from { opacity: 0; transform: translateY(8px) scale(.7); } to { opacity: 1; } }
+@keyframes cart-bump { 0%,100% { transform: scale(1); } 45% { transform: scale(1.1); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .flying-cover, .cart-preview-cover, .cart-bump { animation: none !important; transition: none !important; }
+}
+
+/* ---------- Cesto grande no fim do catálogo ---------- */
+.store-cart-drop {
+  margin: 64px 0 20px;
+  padding: 28px;
+  overflow: hidden;
+  border: 1px solid #aeb4b1;
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(248,249,248,.98), rgba(218,222,219,.97));
+  box-shadow: 0 12px 30px rgba(0,0,0,.12);
+}
+.drop-cart-heading { display:flex; align-items:center; justify-content:space-between; gap:18px; }
+.drop-cart-eyebrow { margin:0 0 5px; color:#68716c; font-size:.72rem; font-weight:900; letter-spacing:.18em; }
+.drop-cart-heading h2 { margin:0; font-size:clamp(1.5rem,3vw,2rem); font-weight:900; }
+.drop-cart-heading p:not(.drop-cart-eyebrow) { margin:5px 0 0; color:#68716c; }
+.drop-cart-total { display:flex; flex-direction:column; align-items:center; justify-content:center; min-width:66px; height:66px; border-radius:50%; color:#fff; background:#292929; box-shadow:0 5px 14px rgba(0,0,0,.2); }
+.drop-cart-total span { font-size:1.35rem; font-weight:900; line-height:1; }
+.drop-cart-total small { font-size:.68rem; }
+.basket-scene { position:relative; min-height:255px; margin-top:18px; display:flex; align-items:flex-end; justify-content:center; }
+.basket-items { position:absolute; z-index:2; left:50%; bottom:105px; width:min(620px,90%); min-height:80px; display:flex; flex-wrap:wrap-reverse; align-content:flex-end; align-items:flex-end; justify-content:center; gap:5px; transform:translateX(-50%); }
+.basket-empty { align-self:center; padding:10px 16px; color:#747c77; font-size:.9rem; text-align:center; }
+.basket-manga { position:relative; width:48px; height:68px; padding:0; overflow:visible; border:2px solid #fff; border-radius:4px; background:#ddd; box-shadow:0 3px 8px rgba(0,0,0,.25); cursor:pointer; transform:rotate(-2deg) translateY(2px); transition:transform .18s, outline .18s, filter .18s; animation: manga-land .38s cubic-bezier(.2,.8,.3,1) both; }
+.basket-manga img { display:block; width:100%; height:100%; object-fit:cover; border-radius:2px; }
+.basket-manga span { position:absolute; inset:-7px -7px auto auto; display:grid; place-items:center; width:21px; height:21px; border-radius:50%; color:#fff; background:#252525; font-size:13px; font-weight:900; opacity:0; transform:scale(.5); transition:.16s; }
+.basket-manga:hover { z-index:5; transform:translateY(-10px) rotate(0) scale(1.08); }
+.basket-manga.is-selected { z-index:6; outline:3px solid #303632; outline-offset:3px; filter:grayscale(.65); transform:translateY(-9px) rotate(0) scale(1.08); }
+.basket-manga.is-selected span { opacity:1; transform:scale(1); }
+.big-basket { position:relative; z-index:1; width:min(440px,90%); height:145px; display:flex; justify-content:center; align-items:flex-end; }
+.basket-rim { position:absolute; z-index:3; left:0; right:0; top:12px; height:28px; border:8px solid #333936; border-radius:50%; background:linear-gradient(#aeb4b1,#777f7a); box-shadow:0 5px 10px rgba(0,0,0,.2); }
+.basket-body { position:relative; width:94%; height:122px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px; color:#f4f5f4; border:7px solid #3a403c; border-top:0; border-radius:12px 12px 45px 45px; background:repeating-linear-gradient(90deg,#626a65 0 13px,#737b75 13px 17px); box-shadow:inset 0 -12px 18px rgba(0,0,0,.2),0 10px 16px rgba(0,0,0,.18); clip-path:polygon(0 0,100% 0,88% 100%,12% 100%); }
+.basket-body span { font-size:2.2rem; filter:grayscale(1) brightness(2); }
+.basket-body b { font-size:.68rem; letter-spacing:.2em; }
+.basket-sparkle { position:absolute; color:#737d76; font-size:2rem; animation:sparkle-float 2.5s ease-in-out infinite; }
+.sparkle-one { left:16%; top:35%; }
+.sparkle-two { right:17%; top:20%; animation-delay:.8s; }
+.basket-controls { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; margin-top:12px; }
+.basket-controls p { margin:0; color:#606963; font-size:.9rem; }
+.basket-controls button:disabled { opacity:.45; cursor:not-allowed; }
+.flying-cover { z-index:1100; border-radius:5px; pointer-events:none; box-shadow:0 14px 30px rgba(0,0,0,.35); }
+.flying-cover.falling-into-basket { animation: manga-fall-to-basket 1.05s cubic-bezier(.35,.05,.55,1) forwards; }
+.big-basket.basket-receive { animation:basket-receive .55s ease; }
+@keyframes manga-fall-to-basket { 0% { transform:translate(0,0) rotate(0) scale(1); opacity:1; } 45% { transform:translate(calc(var(--fall-x)*.48),calc(var(--fall-y)*.48)) rotate(16deg) scale(.9); opacity:1; } 78% { transform:translate(calc(var(--fall-x)*.88),calc(var(--fall-y)*.88)) rotate(-12deg) scale(.72); opacity:1; } 100% { transform:translate(var(--fall-x),var(--fall-y)) rotate(8deg) scale(.58); opacity:0; } }
+@keyframes manga-land { from { opacity:0; transform:translateY(-45px) rotate(12deg) scale(.75); } to { opacity:1; } }
+@keyframes basket-receive { 0%,100% { transform:translateY(0) scale(1); } 35% { transform:translateY(5px) scale(1.035); } 70% { transform:translateY(-3px) scale(.99); } }
+@keyframes sparkle-float { 0%,100% { opacity:.45; transform:translateY(0) rotate(0); } 50% { opacity:1; transform:translateY(-9px) rotate(15deg); } }
+@media(max-width:650px) { .store-cart-drop { padding:20px 14px; margin-top:42px; } .basket-scene { min-height:225px; } .basket-items { bottom:94px; } .basket-manga { width:39px; height:56px; } .big-basket { height:130px; } .basket-body { height:110px; } .basket-controls { align-items:stretch; flex-direction:column; } .basket-controls button { width:100%; } }
+@media(prefers-reduced-motion:reduce) { .flying-cover.falling-into-basket,.basket-manga,.big-basket.basket-receive,.basket-sparkle { animation:none !important; } }
